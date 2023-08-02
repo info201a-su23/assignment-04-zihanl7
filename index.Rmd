@@ -57,7 +57,8 @@ ggplot(data = selected_data, aes(x = year, y = black_jail_pop_rate, color = coun
   labs(title = "Trend of black jail poportation Over Time in the Counties",
        x = "Year",
        y = "[black_jail_pop_rate]",
-       color = "County")
+       color = "County")+
+theme_minimal()
 ```
 
 
@@ -70,7 +71,8 @@ ggplot(data = wapopdata, aes(x = white_jail_pop_rate, y = black_jail_pop_rate)) 
   labs(title = "Relationship between white_jail_pop_rate and black_jail_pop_rate",
        x = "white_jail_pop_rate",
        y = "black_jail_pop_rate",
-       color = "[Category Variable Description]")
+       color = "[Category Variable Description]")+
+  theme_minimal()
 ```
 
 ### Map
@@ -97,5 +99,5 @@ ggplot() +
        x = "Longitude",
        y = "Latitude",
        scale_fill_gradient(low = "blue", high = "red")
-  )
+  ) + theme_minimal()
 ```
