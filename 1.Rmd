@@ -1,0 +1,10 @@
+```{r}
+library(dplyr)
+library(ggplot2)
+ggplot(data, aes(x = white_jail_pop_rate, y = black_jail_pop_rate)) +
+  geom_point() +
+  labs(title = "Relationship between white_jail_pop_rate and black_jail_pop_rate",
+       x = "white_jail_pop_rate",
+       y = "black_jail_pop_rate",
+       color = "[Category Variable Description]")
+```
