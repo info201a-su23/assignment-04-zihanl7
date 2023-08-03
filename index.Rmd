@@ -13,7 +13,7 @@ wapopdata <- read.csv("https://raw.githubusercontent.com/melaniewalsh/Neat-Datas
 ```
 
 In the context of the U.S.'s high incarceration rates, this study focuses on the unique trends in Washington State.
-We will analyze the 'Year', 'Total_prison_pop', 'Total_jail_pop' and 'Jail_pop_rate' variables to understand temporal trends in Washington's incarceration rates and their impact on the state's policies.
+We will analyze the 'Year', 'Total_prison_pop', 'Total_jail_pop' and 'Jail_pop_rate' variables to understand temporal trends in Washington's incarceration rates and their impact on the state's policies. I am going to caluculate the average value jail rate, highest value jail rate, lowest value jail rate, and the median jail rate.
 
 ### Summary Information
 ```{r}
@@ -34,9 +34,19 @@ change_over_years_jail <- wapopdata %>%
   group_by(year) %>%
   summarise(Avg = mean(total_jail_pop_rate, na.rm = TRUE)) %>%
   summarise(Change = diff(Avg))
+
+Median_value_jail <- wapopdata %>%
+  filter(total_jail_pop_rate == median(total_jail_pop_rate, na.rm = TRUE))
+
+max_jail_rate <- max(wapopdata$total_jail_pop_rate, na.rm = TRUE)
+min_jail_rate <- min(wapopdata$total_jail_pop_rate, na.rm = TRUE)
+mean_jail_rate <- mean(wapopdata$total_jail_pop_rate, na.rm = TRUE)
+max_year <- max(wapopdata$year, na.rm = TRUE)
+min_year <- min(wapopdata$year, na.rm = TRUE)
+
 ```
 
-In analyzing incarceration rates in Washington State, we found that the average jail population rate for the most recent year in the data set was 326.6744. The highest jail population rate observed was in County Yakima  with a rate of 992.82, while the lowest rate was in  Whitman County with a rate of 95.94. Over the last ten years, the average jail population rate has changed by -8.747692.
+In analyzing incarceration rates in Washington State, I found that the average jail population rate for the most recent year in the data set was 326.6744. The highest jail population rate observed was in County Yakima  with a rate of 992.82, while the lowest rate was in  Whitman County with a rate of 95.94. Over the last ten years, the average jail population rate has changed by -8.747692. The median jail rate is approximately 298.44.
 
 
 ### The Dataset
@@ -60,7 +70,7 @@ ggplot(data = selected_data, aes(x = year, y = black_jail_pop_rate, color = coun
        color = "County")+
 theme_minimal()
 ```
-
+In order to compare the black jail population overtime, I create a plot to demonstrate the trend of black jial population through 1990 to 2010 in two extreme jail rate county in WA. From the chart, we can see that the for Whitman county, which has the lowest jail rate, the black jail population are very low, and did not have big move, however, for the highest jail rate county - Yakima, the black jail population rate change frequently, and has large number in each year compared to Whitman County.
 
 ### Variable Comparison Chart
 ```{r}
@@ -74,6 +84,7 @@ ggplot(data = wapopdata, aes(x = white_jail_pop_rate, y = black_jail_pop_rate)) 
        color = "[Category Variable Description]")+
   theme_minimal()
 ```
+For this graph, I want to see whether there is relationship between those two variable. From the chart, we can see that the two varible did have no clear shape in the scatter graph above, which means those two are not directly related to each other it may change over time, becasue each year the policy are changing, so we could not make a conclusion that those two variable has a relationship.
 
 ### Map
 
@@ -101,3 +112,4 @@ ggplot() +
        scale_fill_gradient(low = "blue", high = "red")
   ) + theme_minimal()
 ```
+From the the Map, we can see that the jail rate are spread all over the US, and each county seems have similar jail rate.
